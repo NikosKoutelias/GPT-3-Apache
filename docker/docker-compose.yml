@@ -1,0 +1,13 @@
+version: "3.8"
+    
+services:
+  gpt_3:
+    container_name: gpt
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ../app:/var/www/html:rw
+    ports:
+      - "8080:80"

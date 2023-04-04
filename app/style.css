@@ -1,0 +1,69 @@
+/* option fonts */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan&family=Roboto&display=swap');
+body{
+    background-color: #23195e;
+}
+.container{
+    max-width: 1000px;
+    margin: auto;
+    padding-bottom: 20px;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+h2{
+    font-weight: 400;
+    text-align: center;
+    font-size: 1.7rem;
+    margin-top: 25px;
+    color: white;
+    font-family: 'League Spartan', sans-serif;
+}
+.user-action{
+    position: relative;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+input{
+    border: 0px;
+    outline: none;
+    width: calc(100% - 80px);
+    padding: 12px 60px 12px 20px;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+}
+button{
+    position: absolute;
+    right: 0px;
+    top: 1px;
+    border: none;
+    background-color: transparent;
+}
+button > svg{
+    fill: #7F6DF2;
+    padding: 0px 4px;
+    cursor: pointer;
+    outline: none;
+}
+textarea{
+    width: calc(100% - 160px);
+    min-height: 440px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    padding-right: 140px;
+    line-height: 180%;
+    vertical-align: top;
+    cursor: auto;
+    resize: none;
+    outline: none;
+    border: none;
+}
+textarea::-webkit-scrollbar{
+    width: 10px;
+}
+textarea::-webkit-scrollbar-thumb{
+    background: #cacaca;
+    border-radius: 4px;
+}
+textarea{
+    background-color: #dfdede;
+}
