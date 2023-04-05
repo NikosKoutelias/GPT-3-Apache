@@ -1,5 +1,18 @@
 {
+    "name": "opneai/gpt3",
+    "autoload": {
+        "psr-4": {
+            "OpenAi\\Gpt3\\": "src/"
+        }
+    },
     "require": {
-        "orhanerday/open-ai": "^3.3"
+        "orhanerday/open-ai": "4.*",
+        "asika/pdf2text": "^1.0",
+        "league/commonmark": "^2.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }

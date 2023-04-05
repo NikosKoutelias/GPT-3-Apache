@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenAI GPT-3 Model</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 </head>
 <body>
     <h2>Text Completion mode of Openai GPT-3 Model</h2>
     <div class="container">
         <div class="user-action">
-            <input type="text" placeholder="Ask me something.">
+            <input type="text" id="input_question" placeholder="Ask me something.">
             <button>
                 <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40"><path d="M7.75 31.125q-.625.25-1.188-.083-.562-.334-.562-1v-6.459q0-.458.271-.791.271-.334.687-.417l9.959-2.417-9.959-2.416q-.416-.084-.687-.417Q6 16.792 6 16.333V9.958q0-.666.562-1.02.563-.355 1.188-.105l23.708 10q.75.334.75 1.167t-.75 1.125Z"/></svg>
             </button>
         </div>
-        <textarea></textarea>
+        <div id="chat-messages"></div>
     </div>
     <script src="sse.js"></script>
     <script src="script.js"></script>

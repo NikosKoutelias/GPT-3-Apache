@@ -1,34 +1,52 @@
-const input = document.querySelector('input')
-const button = document.querySelector('button')
-const textarea = document.querySelector('textarea')
+const message_input = document.querySelector('button')
+const message_list = document.querySelector( "#chat-messages" );
+const question_asked = document.getElementById( "input_question" );
 
-var communicator = ''
-button.onclick = () => {
-    var prompt = input.value
-    if(prompt != ''){
-        bottomScroll();
-        (textarea.innerHTML == '') ? communicator = 'You: ' : communicator = '\n\nYou: '
-        textarea.innerHTML += communicator + prompt
-        // use SSE to get server Events
-        var source = new SSE("request.php?prompt=" + prompt);
-        input.value = ''
-        input.focus()
-        source.addEventListener('message', function (e) {
-            if(e.data){
-                if(e.data != '[DONE]'){
-                    var tokens = JSON.parse(e.data).choices[0].text
-                    textarea.innerHTML += tokens
-                    bottomScroll();
-                }else{
-                    console.log('Completed');
-                }
-            }
-        })
-        source.stream()
-    }
+const context = [];
+
+message_input.addEventListener( "click", function( e ) {
+
+        add_message( "outgoing", question_asked.value );
+        send_message();
+
+} );
+
+function send_message() {
+    let question = question_asked.value;
+    let message = add_message( "incoming", '<div id="cursor"></div>' );
+     question_asked.value = "";
+     
+    fetch( "request.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "message=" + encodeURIComponent( question ) + "&context=" + encodeURIComponent( JSON.stringify( context ) )
+    } )
+    .then( response => response.text() )
+    .then( data => {
+        const json = JSON.parse( data );
+        if( json.status == "success" ) {
+            update_message( message, json.message );
+            context.push([question, json.raw_message]);
+        }
+        question_asked.focus();
+    } );
 }
 
-function bottomScroll(){
-    textarea.scrollIntoView(false)
-    textarea.scrollTo(0, textarea.scrollHeight)
+function add_message( direction, message ) {
+    const message_item = document.createElement( "div" );
+    message_item.classList.add( "chat-message" );
+    message_item.classList.add( direction+"-message" );
+    message_item.innerHTML = '<p>' + message + "</p>";
+    message_list.appendChild( message_item );
+    message_list.scrollTop = message_list.scrollHeight;
+    hljs.highlightAll();
+    return message_item;
+}
+
+function update_message( message, new_message ) {
+    message.innerHTML = '<p>' + new_message + "</p>";
+    message_list.scrollTop = message_list.scrollHeight;
+    hljs.highlightAll();
 }
